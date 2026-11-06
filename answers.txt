@@ -1,0 +1,33 @@
+Finding 1: location.hash -> innerHTML — DOM-Based Cross-Site Scripting
+The URL fragment is attacker-influenced input. Assigning it to innerHTML makes
+the browser parse the value as HTML. Use textContent when displaying plain text.
+
+Finding 2: localStorage.getItem("config") -> JSON.parse — Untrusted Browser
+Storage / Missing Validation
+localStorage is controlled by the browser user and may contain malformed or
+unexpected data. Parsing does not establish that the object has the expected
+shape or safe values. Handle parse failures and validate the schema and values
+before using the configuration.
+
+Finding 3: Object.assign(config, parsedConfig) — Unsafe Object Merge /
+Prototype Manipulation
+The parsed storage value is untrusted. A JSON object containing a special
+property such as "__proto__" can interact with assignment to an ordinary
+object's prototype setter. This can alter config's prototype and create
+unexpected inherited properties. Use a strict property/value allowlist and
+construct a fresh result instead of merging arbitrary keys.
+
+Finding 4: await getUser() -> renderClient({ user }) — Untrusted API Data
+Crossing Into the Client Renderer
+The API response is external input and is passed wholesale to a client
+renderer. The snippet does not show what renderClient does, so an XSS or
+privileged-property impact depends on its implementation. Validate/project
+the response to the fields the UI needs, and ensure the renderer uses safe DOM
+APIs rather than interpreting values as HTML.
+
+Finding 5: getUser() and renderClient() — Missing Error and Trust-Boundary
+Handling
+The code does not show validation or failure handling for the asynchronous
+request. Treat network/API results as untrusted, validate the expected data
+shape before rendering, and handle request failures without rendering
+partial or success-shaped data.

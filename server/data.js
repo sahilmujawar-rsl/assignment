@@ -1,7 +1,7 @@
 const user = {
     id: 101,
-    name: "John Doe",
-    email: "john@example.com",
+    name: "Sahil Mujawar",
+    email: "sahil.mujawar@rajasoftwarelabs.com",
     role: "Administrator",
 
     sessionToken: "TRAINING-FAKE-ACCESS-TOKEN-12345",
