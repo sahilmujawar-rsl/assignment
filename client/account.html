@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/account.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Account Settings</h1>
+        <nav>
+            <a href="/">Dashboard</a>
+            <a href="/account">Account Settings</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="account-card">
+            <h2>Account Settings</h2>
+            <p><strong>Name:</strong> <span id="account-name"></span></p>
+            <p><strong>Email:</strong> <span id="account-email"></span></p>
+            <p><strong>Role:</strong> <span id="account-role"></span></p>
+            <button id="delete-account" class="danger">Delete Account</button>
+            <p id="account-status" role="status"></p>
+        </section>
+    </main>
+</body>
+</html>
